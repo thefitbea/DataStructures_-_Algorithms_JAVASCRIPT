@@ -22,7 +22,12 @@ if (averageTeamScore[0] > averageTeamScore[1] && averageTeamScore[0] > averageTe
 else if(averageTeamScore[1] > averageTeamScore[0] && averageTeamScore[1] > averageTeamScore[2]){
     console.log("High score is"+averageTeamScore[1]);
 }
-else if(averageTeamScore[2] > averageTeamScore[])
+else if(averageTeamScore[0] === averageTeamScore[1] || averageTeamScore[0] === averageTeamScore[2]){
+    console.log("Its a draw");
+}
+else{
+    console.log("Mary wins by score" + averageTeamScore[2]);
+}
 
 function averageScore(score1,score2,score3){
     average=(score1+score2+score3)/3;
