@@ -36,8 +36,8 @@ var john = new Person("John","Smith",92,195);
 // };
 // regular version of painful process of creating each object.
 
-if(mark.bmi()>john.bmi()){
-    console.log("Bmi of Mark is high with a score of "+ mark.bmi);
+if(mark.bmi()>john.bmi()){//calculated and read at same step
+    console.log("Bmi of Mark is high with a score of "+ mark.bmi);//at this point bmi is already calculated which is simply read.
 }
 else if(mark.bmi()<john.bmi()){
     console.log("John has higher bmi as his is "+john.bmi);    
