@@ -64,3 +64,80 @@
 
 
 // ***************************************
+
+// PRIMITIVES vs OBJECTS
+
+//Objects
+// var a,b;
+// a=23;
+// b=a;
+// a=46;//mutated value of a
+// console.log(a);
+// console.log(b);//primitives(variables hold data in it so changes aren't reflected)
+
+// var objectA={
+//     name: "John",
+//     age:22
+// };
+
+// var objectB={
+//     name:"Jane",
+//     age:23
+// };
+
+// objectB=objectA;
+// objectA.age=33;
+
+// console.log(objectA.age);
+// console.log(objectB.age);//objects contain a reference to data in memory so changes are reflected as its the same exact object
+
+
+// //FUNCTIONS
+
+// var age=27;
+// var objectC={
+//     name:"Jonas",
+//     city:"Berlin"
+// };
+
+// function change(a,b){
+//     a= 39;
+//     b.city="Bangalore";
+// }
+
+// change(age,objectC);
+
+// console.log(age);//same as for objects
+// //primitives remain unchanged so a simple copy is created but in the case of objects a reference to that object is passed into functions.
+// console.log(objectC.city);
+
+// ************************************************
+
+// FIRST CLASS FUNCTIONS(call back functions)
+
+var years =[1960,1967,1990,1890,2000,1998,2014];
+
+//we could create a function which performs all calc and stores result in an array instead we will create a function which gets another calc as arguments
+
+function arrayCalculation(array,fntion){
+    var resultArray=[];
+    for(var i=0;i<array.length;i++){
+        resultArray.push(fntion(array[i]));
+    }
+    return resultArray;
+}
+
+function calculateAge(el){
+    return 2020-el;
+}
+
+var ages=arrayCalculation(years,calculateAge); 
+
+console.log(ages);
+
+function mature(element){
+    return element>=18;
+}
+var maturity=arrayCalculation(ages,mature);
+
+console.log(maturity);
