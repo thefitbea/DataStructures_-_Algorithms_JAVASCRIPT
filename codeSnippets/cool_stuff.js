@@ -195,10 +195,10 @@
 
 //syntax is (anonymous function)();//function expression followed by immediate expression
 
-(function (){
-    var score=Math.random()*10;
-    console.log(score>=5);
-}) ();
+// (function (){
+//     var score=Math.random()*10;
+//     console.log(score>=5);
+// }) ();
 
 // function(){
 
@@ -214,3 +214,51 @@
 // }) (5);
 
 // //so the goal of IIFE is not to produce reusable code as we can call it only once since its not assigned to any variable, all we need is a place to hide variables from outside to obtain data privacy, also dont interfere with other execution contexts
+
+// CLOSURES
+
+function retire(retireAge){
+    var a=" Years left until retirement"
+    return function(yearOfBirth){
+        var age=2020-yearOfBirth;
+        console.log(retireAge-age+a);
+    }
+}
+
+var retirementUsa = retire(66);
+retirementUsa(1998);//same as retire(66)(1990);
+//here we used retireAge and variable a which is outside scope of anonymous function but still it worked even after retire function which declared thes are out of the execution context, stopped its execution becoz of closures
+
+var retirementGermany=retire(65);
+
+var retirementIndia=retire(60);
+
+var retirementIceland=retire(67);
+
+retirementGermany(1998);
+retirementIndia(1998);
+retirementIceland(1998);
+
+//interview example with closures
+
+function interviewClosure(interviewJob){
+    var bye="Good Day!";
+    if(interviewJob==="designer"){
+        return function(interviewee){
+            console.log("Explain UX design, "+interviewee+"?");
+            console.log(bye);
+        }
+    }
+    else if(interviewJob==="teacher"){
+        return function(interviewee){
+            console.log("Whats your subject, "+interviewee+"?");
+            console.log(bye);
+        }
+    }
+    else{
+        return function(interviewee){
+            console.log("Who are u?");
+            console.log(bye);
+        }
+    }
+}
