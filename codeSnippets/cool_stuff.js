@@ -217,48 +217,129 @@
 
 // CLOSURES
 
-function retire(retireAge){
-    var a=" Years left until retirement"
-    return function(yearOfBirth){
-        var age=2020-yearOfBirth;
-        console.log(retireAge-age+a);
+// function retire(retireAge){
+//     var a=" Years left until retirement"
+//     return function(yearOfBirth){
+//         var age=2020-yearOfBirth;
+//         console.log(retireAge-age+a);
+//     }
+// }
+
+// var retirementUsa = retire(66);
+// retirementUsa(1998);//same as retire(66)(1990);
+// //here we used retireAge and variable a which is outside scope of anonymous function but still it worked even after retire function which declared thes are out of the execution context, stopped its execution becoz of closures
+
+// var retirementGermany=retire(65);
+
+// var retirementIndia=retire(60);
+
+// var retirementIceland=retire(67);
+
+// retirementGermany(1998);
+// retirementIndia(1998);
+// retirementIceland(1998);
+
+// //interview example with closures
+
+// function interviewClosure(interviewJob){
+//     var bye="Good Day!";
+//     if(interviewJob==="designer"){
+//         return function(interviewee){
+//             console.log("Explain UX design, "+interviewee+"?");
+//             console.log(bye);
+//         }
+//     }
+//     else if(interviewJob==="teacher"){
+//         return function(interviewee){
+//             console.log("Whats your subject, "+interviewee+"?");
+//             console.log(bye);
+//         }
+//     }
+//     else{
+//         return function(interviewee){
+//             console.log("Who are u?");
+//             console.log(bye);
+//         }
+//     }
+// }
+
+// var designerInterview=interviewClosure("designer");
+// designerInterview("Yuzuki");
+
+
+// *********************************************
+
+// BIND,CALL & APPLY
+
+// var rahul={
+//     name: "Rahul",
+//     age:22,
+//     job:"teacher",
+//     presentation:function(style,timeOfDay){
+//         if(style==="formal"){
+//             console.log("Good "+timeOfDay+" ladies and gentlemen!. I\'m "+this.name+",a "+this.age+" year old "+this.job);
+//         }
+//         else{
+//              console.log("Hey whatsapp. I\'m "+this.name+",a "+this.age+" year old "+this.job+". Have a nice "+timeOfDay);
+//         }
+//     }
+// };
+
+// rahul.presentation("formal","morning");
+
+
+// var emily={
+//     name:"Emily",
+//     age:27,
+//     job:"designer"
+// };
+
+// //#call method
+
+// //since emily object doesn't have presentation method we can use call method
+
+// rahul.presentation.call(emily,"casual","evening");//first argument of call method is "this" variable, called method borrowing as it borrows presentation method of rahul, call method allows us to set "this" variable
+
+
+// //#apply method
+
+// //The only difference between call method and apply method is that apply method accepts arguments as array
+
+// rahul.presentation.apply(emily,["friendly","afternoon"]);
+
+// //#bind method
+// //also allows us to set this variable and it doesnt immediateley call function but instead a copy of function so we can store it somewhere useful to sreate function with preset arguments.
+
+// var rahulFriendly=rahul.presentation.bind(rahul,"friendly");
+
+// rahulFriendly("night");//this is called carrying in which we create a function based on another function with preset arguments and bind allows us to do so.
+
+// EXAMPLE
+
+var years =[1960,1967,1990,1890,2000,1998,2014];
+
+
+function arrayCalculation(array,fntion){
+    var resultArray=[];
+    for(var i=0;i<array.length;i++){
+        resultArray.push(fntion(array[i]));
     }
+    return resultArray;
 }
 
-var retirementUsa = retire(66);
-retirementUsa(1998);//same as retire(66)(1990);
-//here we used retireAge and variable a which is outside scope of anonymous function but still it worked even after retire function which declared thes are out of the execution context, stopped its execution becoz of closures
-
-var retirementGermany=retire(65);
-
-var retirementIndia=retire(60);
-
-var retirementIceland=retire(67);
-
-retirementGermany(1998);
-retirementIndia(1998);
-retirementIceland(1998);
-
-//interview example with closures
-
-function interviewClosure(interviewJob){
-    var bye="Good Day!";
-    if(interviewJob==="designer"){
-        return function(interviewee){
-            console.log("Explain UX design, "+interviewee+"?");
-            console.log(bye);
-        }
-    }
-    else if(interviewJob==="teacher"){
-        return function(interviewee){
-            console.log("Whats your subject, "+interviewee+"?");
-            console.log(bye);
-        }
-    }
-    else{
-        return function(interviewee){
-            console.log("Who are u?");
-            console.log(bye);
-        }
-    }
+function calculateAge(el){
+    return 2020-el;
 }
+
+
+
+function mature(limit,element){
+    return element>=limit;
+}
+
+var ages =arrayCalculation(years, calculateAge);
+
+var matureJapan=arrayCalculation(ages,mature.bind(this,20));//in Japan 20 is adult age limit
+
+console.log(ages);
+console.log(matureJapan);
