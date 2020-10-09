@@ -23,6 +23,9 @@ Question.prototype.checking=function(answer,callback){
         alert("You WON a Score! \n (^_^) ");
         userScore=callback(true);//scoreKeeper function actually
 
+        generateQuestion();
+        
+   //*********TAG1****************
         //If u paste TAG1 here and TAG2 to its TAG2 marked place then exit functionality is removed
     }
     else{
@@ -66,19 +69,11 @@ function generateQuestion(){
     questionSelector=Math.floor(Math.random()*questionList.length);
     questionList[questionSelector].ask();
     //user input or user's answer
-    userAnswer=prompt("Enter Your Option Number: ");
+    userAnswer=parseInt(prompt("Enter Your Option Number: "));
 
     //*********TAG1***************
-    if(userAnswer!=="exit"){
-            questionList[questionSelector].checking(parseInt(userAnswer),scoreKeeper);//**********TAG2************
-            generateQuestion();
-        }
-        else{ 
-         console.log("You decided to Quit!");
-         alert("You QUITTED!");  
-        }
-   //*********TAG1****************
     
+    questionList[questionSelector].checking(userAnswer,scoreKeeper);//**********TAG2************
    //*********TAG2****************
 }
 generateQuestion();
